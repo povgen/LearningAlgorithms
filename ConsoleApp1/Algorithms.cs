@@ -61,19 +61,30 @@ public static class Algorithms
 		return result;
 	}
 
+	public static int Sum(int[] arr) => Sum(new Stack<int>(arr));	
 
-    public static int[] SelectionSortSecVer(int[] arr)
-    {
-        Stack<int> result = new();
-		result.Push(arr[0]);
-		int curPos = 0;
-		for (int i = 0; i < arr.Length; i++)
-		{
-			for (int j = 0; j < arr.Length; j++)
-			{
-				if (arr[j] < result.Last()) { result.Push(arr[j]); break; }
-			}
-		}
-        return result.ToArray();
+	public static int Sum(Stack<int> arr) => arr.Count == 0 ? 0 : arr.Pop() + Sum(arr);
+
+
+    public static int Count(int[] arr) => Count(new Stack<int>(arr));
+
+    public static int Count(Stack<int> arr)
+	{
+		if (arr.Count == 0) return 0;
+		arr.Pop();
+		return 1 + Count(arr);
+	}
+
+	public static int Max(int[] arr) => Max(new Stack<int>(arr), arr[0]);
+
+	public static int Max(Stack<int> arr, int max) 
+	{
+		if (arr.Count == 0) return max;
+		var curEl = arr.Pop();
+		if (max < curEl) max = curEl;
+		return Max(arr, max);
+
     }
+
+
 }

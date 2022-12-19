@@ -24,6 +24,40 @@ public static class Algorithms
         return null;
 	}
 
+    //TODO binarySearch
+    public static int? BinarySearchRecursive(int[] sortedArray, int searchValue) => BinarySearchRecursive(sortedArray, searchValue, 0, sortedArray.Length-1);
+
+
+    public static int? BinarySearchRecursive(int[] sortedArray, int searchValue, int low, int hight)
+	{
+		if(low > hight) return null;
+
+        int mid = (Int32)Math.Round((low + hight) / 2.0);
+
+		if (sortedArray[mid] == searchValue) return mid;
+
+		if (sortedArray[mid] > searchValue) hight = mid - 1;
+        else low = mid + 1;
+
+        return BinarySearchRecursive(sortedArray, searchValue, low, hight);
+
+    }
+
+	public static int? BinarySearchRecursiveSecVer(int[] sortedArray, int searchValue) => BinarySearchRecursiveSecVer(new List<int>(sortedArray), searchValue);
+
+    public static int? BinarySearchRecursiveSecVer(List<int> sortedArray, int searchValue, int offset = 0)
+    {
+        if (sortedArray.Count == 0) return null;
+
+        int mid = (Int32)Math.Floor(sortedArray.Count / 2.0);
+
+		if (sortedArray[mid] == searchValue) return offset + mid;
+
+
+		return sortedArray[mid] > searchValue ? BinarySearchRecursiveSecVer(sortedArray.GetRange(0, mid), searchValue, offset) 
+			: BinarySearchRecursiveSecVer(sortedArray.GetRange(mid, sortedArray.Count - 1), offset + mid);
+
+    }
 
     /// <param name="arr"></param>
     /// <returns>index of smallest elemnt of array</returns>
@@ -68,7 +102,7 @@ public static class Algorithms
 
     public static int Count(int[] arr) => Count(new Stack<int>(arr));
 
-    public static int Count(Stack<int> arr)
+    public static int Count(Stack<int> arr)	
 	{
 		if (arr.Count == 0) return 0;
 		arr.Pop();
@@ -83,6 +117,18 @@ public static class Algorithms
 		var curEl = arr.Pop();
 		if (max < curEl) max = curEl;
 		return Max(arr, max);
+
+    }
+
+	public static int MaxVerSec(int[] arr) => MaxVerSec(new List<int>(arr));
+
+    public static int MaxVerSec(List<int> arr)
+    {
+        if (arr.Count == 2) return arr[0] > arr[1] ? arr[0] : arr[1];
+
+		int sub_max = MaxVerSec(arr.GetRange(1, arr.Count - 1));
+
+		return arr[0] > sub_max ? arr[0] : sub_max;
 
     }
 

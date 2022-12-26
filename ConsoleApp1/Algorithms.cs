@@ -182,7 +182,7 @@ public static class Algorithms
             QuiickSortV2(array, leftIndex, j); //иииии, что массив как-то по ссылке передаётся или что, как результат сортировки сохраняется 
 
         if (i < rightIndex)
-            QuiickSortV2(array, i, rightIndex);
+            QuiickSortV2(array, i, rightIndex); //После некоторых эксперементов прищел к заключению, что массивы передаются по ссылке?!?
 
         return array;
     }

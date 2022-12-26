@@ -70,6 +70,7 @@ switch (mode)
         Console.WriteLine(string.Join(' ', Algorithms.QuickSort(unsortedArr)));
     break;
 
+
     default:
         Console.WriteLine($"Entered mode not found!");
     break;

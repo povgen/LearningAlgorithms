@@ -1,4 +1,5 @@
 ﻿// See https://aka.ms/new-console-template for more information
+using ConsoleApp1;
 using myProject;
 int[] sortedArr = { 0, 2, 3, 5, 6, 7, 8, 9, 10, 12, 22, 45, 77, 78 };
 List<int> unsortedList = new() { 3, 4, 5, 2, 0, 9, 3, 2, 7, 90, 54, 22, 4, 0, 2};
@@ -14,7 +15,8 @@ string[] mods =
     "6 - Recursive max",
     "7 - Binary search recursive",
     "8 - Recursive max - book's resolve",
-    "9 - QuickSort"
+    "9 - QuickSort",
+    "10 - SearchGraph"
 
 };
 
@@ -68,6 +70,41 @@ switch (mode)
     case 9:
         Console.WriteLine(string.Join(' ', unsortedList));
         Console.WriteLine(string.Join(' ', Algorithms.QuickSort(unsortedArr)));
+    break;
+
+    case 10:
+        var peggi = new Node("Peggi", new List<Node>()
+        {
+            new Node("Max"),
+            new Node("Anna"),
+            new Node("Gena"),
+            new Node("Dean"),
+        });
+        var graph = new Node("you", new List<Node>() 
+        {
+            new Node("Bob", new List<Node>() 
+            {
+                new Node("Anudy"),
+                peggi
+            }),
+            new Node("Klar", new List<Node>() 
+            {
+                new Node("Jhonny"),
+                new Node("Tommy"),
+            }),
+            new Node("Alice", new List<Node>() { peggi })
+        });
+
+        Node? findedNode = graph.SearchNearstChid((node) => node.Name.Contains('o'));
+        if (findedNode != null)
+        {
+            Console.WriteLine(findedNode.Name);
+        } else
+        {
+            Console.WriteLine("Поиск не дал результатов!");
+        }
+        
+
     break;
 
 
